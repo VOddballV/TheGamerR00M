@@ -8,13 +8,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             controller: 'AddUserController'
         })
     $stateProvider
-        .state('InstallForum', {
-            url: '/InstallForum',
-            templateUrl: 'Forum/phpBB3/install/index.php',
+        .state('Forum', {
+            url: '/Forum/',
+            templateUrl: 'forum/index.php'
         });
 }]);
 
-app.controller('AddUserController', ['$scope', function ($scope) {
+app.controller('MainController', ['$scope', '$Window', function ($scope, $Window) {
 
 }]);
 
