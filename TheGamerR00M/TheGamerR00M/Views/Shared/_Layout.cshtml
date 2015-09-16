@@ -15,7 +15,7 @@
     <script src="~/Scripts/app.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top nav-bar-border">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,16 +28,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Forums", "Index", "Help", new { area = "" }, null)</li>
+                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Forums", "Index", "Help", new { area = "" }, null)</li>*@
                 </ul>
             </div>
         </div>
     </div>
 
-    <div id="leftPanel"></div>
+    @*<div id="leftPanel" class="col-lg-1"></div>*@
     <div class="container body-content">
-        <button class="btn-primary" ng-href="#/Forum">Install Forum</button>
+        <br/>
         @RenderBody()
         <hr />
         <footer>
