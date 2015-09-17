@@ -51,3 +51,8 @@ textarea {
 .LinkButt{
 
 }
+
+.loader {
+    background: black;
+    z-index: 0
+}

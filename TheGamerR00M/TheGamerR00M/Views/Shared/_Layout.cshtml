@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html ng-app="newSite">
 <head>
-    <base href="http://localhost:65213/#!/" />
+    @*<base href="http://gamerr00m.org/#!/" />*@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>The Gamer R00M</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/loaders.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
     <script src="~/Scripts/angular-ui-router.min.js"></script>
@@ -16,47 +17,56 @@
     <script src="~/Scripts/app.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top nav-bar-border">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <p ui-sref="Home" class="LinkButt">@Html.ActionLink("The Gamer R00M", "", "", null, new { @class = "navbar-brand" })</p>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li ui-sref="Reviews" class="LinkButt">@Html.ActionLink("Reviews", "", "", "", null)</li>
-                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Forums", "Index", "Help", new { area = "" }, null)</li>*@
-                </ul>
+    <div class="loader">
+        <div class="loader-inner pacman">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="navbar navbar-inverse navbar-fixed-top nav-bar-border">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <p ui-sref="Home" class="LinkButt">@Html.ActionLink("The Gamer R00M", "", "", null, new { @class = "navbar-brand" })</p>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li ui-sref="Reviews" class="LinkButt">@Html.ActionLink("Reviews", "", "", "", null)</li>
+                        @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("Forums", "Index", "Help", new { area = "" }, null)</li>*@
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        <div id="MainContent" ui-view>
-            @*<div id="leftPanel" class="col-lg-1"></div>*@
+        <div class="container body-content">
+            <div id="MainContent" ui-view>
+                @*<div id="leftPanel" class="col-lg-1"></div>*@
 
-            <br />
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
+                <br />
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-<script>
-    var blnHasLoaded = false
-    if(window.onload = true && blnHasLoaded == false){
-        window.location.hash = "#!/"
-        blnHasLoaded = true
-        //location.reload();
-    }
-</script>
+    <script>
+        var blnHasLoaded = false
+        if (window.onload = true && blnHasLoaded == false) {
+            window.location.hash = "#!/"
+            blnHasLoaded = true
+            //location.reload();
+        }
+    </script>
 </body>
 </html>
