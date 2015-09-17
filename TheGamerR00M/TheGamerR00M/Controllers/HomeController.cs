@@ -12,7 +12,8 @@ namespace TheGamerR00M.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return View("Home/index");
         }
+
     }
 }

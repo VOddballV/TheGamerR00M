@@ -1,17 +1,43 @@
 ﻿var app = angular.module('newSite', ['ui.router', 'ngAnimate', 'infinite-scroll', 'ui.bootstrap']);
-app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    var rootUrl = $("#linkRoot").attr("href");
+    $urlRouterProvider.otherwise('/Oops');
     $stateProvider
-        .state('Users', {
-            url: '/Users',
-            templateUrl: 'Users.html',
-            controller: 'AddUserController'
-        })
+        .state('Home', {
+            url: '/Home',
+            templateUrl: 'App/Views/Home/index.cshtml',
+    })
     $stateProvider
-        .state('Forum', {
-            url: '/Forum/',
-            templateUrl: 'forum/index.php'
+    .state('Default', {
+        url: '/',
+        templateUrl: 'App/Views/Home/index.cshtml',
+    })
+    $stateProvider
+        .state('Default2', {
+            url: '#!/',
+            templateUrl: 'App/Views/Home/index.cshtml'
+    });
+    $stateProvider
+        .state('Reviews', {
+            url: '/Reviews',
+            templateUrl: 'App/Views/Reviews/index.cshtml'
         });
+    //$stateProvider
+    //    .state('PageNotFound', {
+    //        url: '/*.',
+    //        templateUrl: 'PageNotFound.cshtml'
+    //    });
+    //$stateProvider
+    //    .state('Default', {
+    //        url: '/',
+    //        templateUrl: '_Layout.cshtml'
+    //    });
+    $stateProvider
+        .state('Oops', {
+        url: '/Oops',
+        templateUrl: 'App/Views/PageNotFound.cshtml'
+    });
+    $locationProvider.hashPrefix('!');
 }]);
 
 app.controller('MainController', ['$scope', '$Window', function ($scope, $Window) {

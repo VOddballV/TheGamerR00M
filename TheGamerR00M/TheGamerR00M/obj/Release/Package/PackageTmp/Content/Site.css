@@ -16,9 +16,9 @@ textarea {
     max-width: 280px;
 }
 
-#leftPanel{
+/*#leftPanel{
     float: left;
-    width: 200px;
+    width: auto;
     height: 1500px;
     background-color: black;
     border-right: 4px solid;
@@ -26,7 +26,7 @@ textarea {
     border-right-color: red;
     border-bottom-color: red;
     border-bottom-right-radius: 15px;
-}
+}*/
 
 #leftCurve{
     float: left;
@@ -34,4 +34,20 @@ textarea {
     height: 50px;
     background-color: black;
     border-radius: 25px
+}
+
+.nav-bar-border{
+    border-bottom: 4px solid;
+    border-bottom-color: red;
+}
+
+.astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+
+.LinkButt{
+
 }
