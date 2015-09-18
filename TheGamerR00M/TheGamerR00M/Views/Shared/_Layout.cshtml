@@ -14,13 +14,14 @@
     <script src="~/Scripts/angular-animate.min.js"></script>
     <script src="~/Scripts/ui-bootstrap-tpls-0.13.3.min.js"></script>
     <script src="~/Scripts/ng-infinite-scroll.min.js"></script>
+    <script src="~/Scripts/smoothscroll.js"></script>
     <script src="~/Scripts/app.js"></script>
 </head>
-<body >
+<body>
 
     <div id="loader-wrapper">
         <div id="loader">
-            <div id="loader" class="loader-inner pacman">
+            <div id="loaderpac" class="loader-inner pacman">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -47,23 +48,19 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li ui-sref="Reviews" class="LinkButt">@Html.ActionLink("Reviews", "", "", "", null)</li>
-                        @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                            <li>@Html.ActionLink("Forums", "Index", "Help", new { area = "" }, null)</li>*@
                     </ul>
                 </div>
             </div>
         </div>
         <div class="container body-content">
             <div id="MainContent" ui-view>
-                @*<div id="leftPanel" class="col-lg-1"></div>*@
-
                 <br />
                 @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-                </footer>
             </div>
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
@@ -76,14 +73,17 @@
             blnHasLoaded = true
             //location.reload();
         }
-        $(document).ready(function () {
 
-            setTimeout(function () {
-                $('body').addClass('loaded');
-                $('h1').css('color', '#222222');
-            }, 3000);
+        //document.getElementById('element').className = 'loaded';
+            $(window).load(function () {
+                setTimeout( 5000, function () {
+                
+                        // Animate loader off screen
+                        $('body').addClass('loaded');
+                
+                });
+            });
 
-        });
     </script>
 </body>
 </html>

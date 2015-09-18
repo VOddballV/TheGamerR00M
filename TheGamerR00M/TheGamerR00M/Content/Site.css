@@ -52,7 +52,7 @@ textarea {
 
 }
 
-#loader {
+#loaderpac {
     position: fixed;
     left: 50%;
     top: 45%;
@@ -84,8 +84,8 @@ h1 {
 #loader-wrapper .loader-section {
     position: fixed;
     top: 0;
-    width: 51%;
-    height: 100%;
+    width: 2000px;
+    height: 1000px;
     background: #222222;
     z-index: 1000;
 }
@@ -103,6 +103,7 @@ h1 {
     padding-bottom: 50px;
     width: 80%;
     max-width: 978px;
+    z-index: 10
 }
 
 /* Loaded */
@@ -146,3 +147,39 @@ h1 {
         -webkit-transition: all 0.3s 1s ease-out; 
                 transition: all 0.3s 1s ease-out;
 }
+
+.loaded #RetroMe {
+    opacity: 1;
+    left: 55%;
+    transition: all 2s 0.3s ease-in;
+}
+
+#RetroMe{
+    transform: scaleX(-1); 
+    filter: FlipH; 
+    bottom: 55%;
+    left: 100%;
+    z-index: 1;
+    /*animation-duration: 2s;*/
+    opacity: 0;
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+.marquee {
+    white-space: nowrap;
+    animation: rightThenLeft 2s linear;
+}
+
+/* The animation code */
+@keyframes RetroMeMove {
+    from {Left: 100%; opacity: 0;}
+    to {left: 50%; opacity: 1;}
+}
+
+/*@media (max-width: 1026px) {
+    #RetroMe {
+        display: none;
+    }
+}*/

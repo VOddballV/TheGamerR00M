@@ -123,8 +123,6 @@ C:\TheProject\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Security.MicrosoftAcc
 C:\TheProject\TheGamerR00M\TheGamerR00M\bin\System.Web.Http.Owin.xml
 C:\TheProject\TheGamerR00M\TheGamerR00M\obj\Debug\TheGamerR00M.dll
 C:\TheProject\TheGamerR00M\TheGamerR00M\obj\Debug\TheGamerR00M.pdb
-C:\TheProject\TheGamerR00M\TheGamerR00M\bin\MySql.Data.Entity.EF6.dll
-C:\TheProject\TheGamerR00M\TheGamerR00M\obj\Debug\TheGamerR00M.csprojResolveAssemblyReference.cache
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\TheGamerR00M.dll.config
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\TheGamerR00M.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\TheGamerR00M.pdb
