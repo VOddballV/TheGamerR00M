@@ -43,11 +43,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <p ui-sref="Home" class="LinkButt">@Html.ActionLink("The Gamer R00M", "", "", null, new { @class = "navbar-brand" })</p>
+                    <button id="brandTitle" ui-sref="Home" class="LinkButt navbar-brand">The Gamer R00M</button>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li ui-sref="Reviews" class="LinkButt">@Html.ActionLink("Reviews", "", "", "", null)</li>
+                    <ul id="SubMenu" class="nav navbar-nav">
+                        <li id="Home" ui-sref="Home" class="LinkButt" hidden="hidden"></li>
+                        <li id="Reviews" ui-sref="Reviews" class="LinkButt">@Html.ActionLink("Reviews", "", "", "", null)</li>
                     </ul>
                 </div>
             </div>
@@ -73,17 +74,23 @@
             blnHasLoaded = true
             //location.reload();
         }
-
-        //document.getElementById('element').className = 'loaded';
-            $(window).load(function () {
-                setTimeout( 5000, function () {
-                
-                        // Animate loader off screen
-                        $('body').addClass('loaded');
-                
-                });
+        if ( $(window).width() > 739) {
+            //Add your javascript for large screens here
+        }
+        else {
+            //  If user clicks on navbar in mobile close navbar
+            $('.nav a').on('click', function () {
+                $('.navbar-toggle').click()
             });
-
+            var home = document.getElementById('#Home');
+        }
+        // Preload animation run
+        $(window).load(function () {
+            setTimeout( 5000, function () {
+                // Animate loader off screen
+                $('body').addClass('loaded');
+            });
+        });
     </script>
 </body>
 </html>

@@ -142,7 +142,6 @@ C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Secur
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\MySql.Data.Entity.EF6.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Newtonsoft.Json.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Owin.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\System.Net.Http.Formatting.dll
