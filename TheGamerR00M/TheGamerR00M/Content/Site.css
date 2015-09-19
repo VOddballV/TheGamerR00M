@@ -178,10 +178,14 @@ h1 {
     to {left: 50%; opacity: 1;}
 }
 
-/*@media (max-width: 1026px) {
-    #RetroMe {
-        display: none;
+/*@media (min-width: 768px) {
+    #Home {
+        display: block;
     }
+}*/
+
+/*#Home {
+    display: none;
 }*/
 
 #brandTitle {

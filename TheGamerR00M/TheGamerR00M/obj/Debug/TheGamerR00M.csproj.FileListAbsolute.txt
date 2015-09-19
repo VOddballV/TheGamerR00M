@@ -183,6 +183,5 @@ C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Secur
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\bin\System.Web.Http.Owin.xml
-C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\obj\Debug\TheGamerR00M.csprojResolveAssemblyReference.cache
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\obj\Debug\TheGamerR00M.dll
 C:\Users\Oddball\TheGamerR00M\TheGamerR00M\TheGamerR00M\obj\Debug\TheGamerR00M.pdb
