@@ -4,7 +4,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $urlRouterProvider.otherwise('/Oops');
     $stateProvider
         .state('Home', {
-            url: '/Home',
+            url: '/home',
             templateUrl: 'App/Views/Home/index.cshtml',
     })
     $stateProvider
@@ -19,7 +19,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
     $stateProvider
         .state('Reviews', {
-            url: '/Reviews',
+            url: '/reviews',
             templateUrl: 'App/Views/Reviews/index.cshtml'
         });
     //$stateProvider
