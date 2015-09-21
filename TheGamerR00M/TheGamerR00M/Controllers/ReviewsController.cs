@@ -9,9 +9,17 @@ namespace TheGamerR00M.Controllers
     public class ReviewsController : Controller
     {
         // GET: Reviews
-        public ActionResult Index()
+        public ActionResult Index(Models.UserModel UserInfo)
         {
-            return View();
+            if (UserInfo.UserName == null)
+            {
+                return View();
+            }
+            //  Else Set users name
+            else
+            {
+                return View(UserInfo);
+            }
         }
     }
 }

@@ -37,21 +37,28 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("The Gamer R00M", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("The Gamer R00M", "Index", "Home", Model, new { @class = "navbar-brand" })
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul id="SubMenu" class="nav navbar-nav">
-                        <li id="Home" onclick="closeSub();" hidden="hidden">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Index", "Reviews", new { area = "" }, null)</li>   
-                        <li id="LogIn" onclick="closeSub();">@Html.ActionLink("Log In", "Index", "LogIn", new { area = "" }, null)</li>                       
-                    </ul>
-                    <span>
-                        @if (Model.UserName != null)
+                        <li id="Home" onclick="closeSub();" hidden="hidden">@Html.ActionLink("Home", "Index", "Home", Model, null)</li>
+                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Index", "Reviews", Model, null)</li> 
+                        @if (Model != null)
                         {
+                            @Html.HiddenFor(x => x.UserEmail)
+                            @Html.HiddenFor(x => x.UserID)
+                            @Html.HiddenFor(x => x.UserPass)
+                            @Html.HiddenFor(x => x.UserName)
+                            @Html.HiddenFor(x => x.UserRankID)
+                            @Html.HiddenFor(x => x.UserStatusID)
                             string name = Model.UserName;
-                            @Html.ActionLink((string) name, "Index", "Account", new { area = "" }, null)
-                        }   
-                    </span>
+                            <li id="Account" onclick="closeSub();">@Html.ActionLink((string)name, "Index", "Account", Model, new { @class = "nav-bar-MyAccount" })</li>
+                        }
+                        else
+                        {
+                            <li id="LogIn" onclick="closeSub();">@Html.ActionLink("Log In", "Index", "LogIn", new { area = "" }, null)</li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>

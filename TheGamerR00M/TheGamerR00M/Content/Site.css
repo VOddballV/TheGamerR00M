@@ -230,6 +230,10 @@ h1 {
     margin-left: 20px;
 }
 
+.nav-bar-MyAccount {
+    text-align: right;
+}
+
 @media (max-width: 768px) {
     #userLogin {
         border-radius: 25px;
@@ -237,5 +241,8 @@ h1 {
     }
     #userReg {
         border-radius: 25px;
+    }
+    .nav-bar-MyAccount {
+    text-align: left;
     }
 }

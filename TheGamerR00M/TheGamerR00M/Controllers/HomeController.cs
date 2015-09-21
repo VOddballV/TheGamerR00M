@@ -12,21 +12,28 @@ namespace TheGamerR00M.Controllers
         {
             ViewBag.Title = "Home Page";
             //  If you're not a user then just return home view
-            if (UserInfo == null)
+            if (UserInfo.UserName == null)
             {
                 return View();
             }
             //  Else Set users name
             else
             {
-                ViewBag.UserName = UserInfo.UserName;
+                return View(UserInfo);
             }
-            return View();
         }
 
-        public ActionResult PageNotFound()
+        public ActionResult PageNotFound(Models.UserModel UserInfo)
         {
-            return View();
+            if (UserInfo.UserName == null)
+            {
+                return View();
+            }
+            //  Else Set users name
+            else
+            {
+                return View(UserInfo);
+            }
         }
 
         public ActionResult Error()

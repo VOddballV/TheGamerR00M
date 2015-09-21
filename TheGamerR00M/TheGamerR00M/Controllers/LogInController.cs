@@ -16,12 +16,11 @@ namespace TheGamerR00M.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(Models.UserModel UserInfo)
+        public ActionResult Index(Models.UserModel UserInfo)
         {
             //Check new password with confirmed password
             var UserName = Request.Form["UserName"];
             var Password = Request.Form["Password"];
-            //  Find user and validate 
             UserInfo = UserDetail(UserName);
             // Is that userName valid
             if (UserInfo == null)
@@ -37,15 +36,22 @@ namespace TheGamerR00M.Controllers
                 TempData.Add("errorInvalid", "Invalid Password");
                 return View("Index");               
             }
+            //  Find user and validate 
             return RedirectToRoute("Home", UserInfo);
         }
 
         private UserModel UserDetail(string username)
         {
             UserModel UserInfo = new UserModel();
-            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities){
+            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
+            {
                 //DataSet dsTemp = null;
                 var query = db.Users.Where(x=> x.UserName == username).FirstOrDefault();
+                //  If user is not found return null
+                if (query.UserID == 0)
+                {
+                    return null;
+                }
                 //  Assign Values to UserInfo
                 UserInfo.UserEmail = query.UserEmail;
                 UserInfo.UserID = query.UserID;
@@ -53,6 +59,7 @@ namespace TheGamerR00M.Controllers
                 UserInfo.UserPass = query.UserPass;
                 UserInfo.UserRankID = query.UserRankID;
                 UserInfo.UserStatusID = query.UserStatusID;
+                
             }
             return UserInfo;
         }
