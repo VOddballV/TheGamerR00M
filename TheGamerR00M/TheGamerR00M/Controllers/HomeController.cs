@@ -12,8 +12,17 @@ namespace TheGamerR00M.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            return View("Home/index");
+            return View();
         }
 
+        public ActionResult PageNotFound()
+        {
+            return View();
+        }
+
+        public ActionResult Error()
+        {
+            return RedirectToRoute("PageNotFound");
+        }
     }
 }

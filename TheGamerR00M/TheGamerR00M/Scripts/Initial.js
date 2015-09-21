@@ -1,7 +1,8 @@
 ﻿var blnHasLoaded = false
 var windowsize = $(window).width();
+hasLoaded();
+
 if (window.onload = true && blnHasLoaded == false) {
-    window.location.hash = "#!/"
     blnHasLoaded = true
     //location.reload();
 }
@@ -26,18 +27,19 @@ function checkWidth() {
 }
 //  close the sub menu if on mobile or when submenu appears
 function closeSub() {
-    console.log(windowsize)
     if (windowsize < 769) {
         //  If user clicks on navbar in mobile close navbar
         $('.navbar-toggle').click()
     }
 }
-//  Check Width of Screen
-$(window).resize(checkWidth)
-// Preload animation run
-$(window).load(function () {
-    setTimeout(5000, function () {
+
+function hasLoaded() {
+    //  Check Width of Screen
+    $(window).resize(checkWidth)
+    // Preload animation run
+    $(window).load(function () {
         // Animate loader off screen
         $('body').addClass('loaded');
+        console.log("Made it")        
     });
-});
+}

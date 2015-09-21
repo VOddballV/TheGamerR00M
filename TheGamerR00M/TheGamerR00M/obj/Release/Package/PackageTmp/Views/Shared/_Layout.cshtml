@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="newSite">
+<html>
 <head>
     @*<base href="http://gamerr00m.org/#!/" />*@
     <meta charset="utf-8" />
@@ -9,13 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/loaders.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-    <script src="~/Scripts/angular-ui-router.min.js"></script>
-    <script src="~/Scripts/angular-animate.min.js"></script>
-    <script src="~/Scripts/ui-bootstrap-tpls-0.13.3.min.js"></script>
     <script src="~/Scripts/ng-infinite-scroll.min.js"></script>
     <script src="~/Scripts/smoothscroll.js"></script>
-    <script src="~/Scripts/app.js"></script>
 </head>
 <body>
 
@@ -43,24 +38,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <button id="brandTitle" ui-sref="Home" class="navbar-brand">The Gamer R00M</button>
+                    @Html.ActionLink("The Gamer R00M", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul id="SubMenu" class="nav navbar-nav">
-                        <li id="Home" ui-sref="Home" onclick="closeSub();" hidden="hidden">@Html.ActionLink("Home", "", "", "", null)</li>
-                        <li id="Reviews" ui-sref="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "", "", "", null)</li>                        
+                        <li id="Home" onclick="closeSub();" hidden="hidden">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Index", "Reviews", new { area = "" }, null)</li>                        
                     </ul>
                 </div>
             </div>
         </div>
         <div class="container body-content">
-            <div id="MainContent" ui-view>
+            <div id="MainContent">
                 <br />
                 @RenderBody()
             </div>
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                <p>&copy; @DateTime.Now.Year - The Gamer R00M</p>
             </footer>
         </div>
     </div>
