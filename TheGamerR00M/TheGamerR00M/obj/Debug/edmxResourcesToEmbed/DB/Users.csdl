@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_9D88FA_TheGamerR00MModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccountStatu">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserStatusID_AccountStatus" FromRole="AccountStatus" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Rank">
+    <Key>
+      <PropertyRef Name="RankID" />
+    </Key>
+    <Property Name="RankID" Type="Int32" Nullable="false" />
+    <Property Name="RankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UserRankID_Ranks" FromRole="Ranks" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserRankID" Type="Int32" Nullable="false" />
+    <Property Name="UserStatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountStatu" Relationship="Self.FK_UserStatusID_AccountStatus" FromRole="Users" ToRole="AccountStatus" />
+    <NavigationProperty Name="Rank" Relationship="Self.FK_UserRankID_Ranks" FromRole="Users" ToRole="Ranks" />
+  </EntityType>
+  <Association Name="FK_UserStatusID_AccountStatus">
+    <End Role="AccountStatus" Type="Self.AccountStatu" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountStatus">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRankID_Ranks">
+    <End Role="Ranks" Type="Self.Rank" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ranks">
+        <PropertyRef Name="RankID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserRankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_9D88FA_TheGamerR00MEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountStatus" EntityType="Self.AccountStatu" />
+    <EntitySet Name="Ranks" EntityType="Self.Rank" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_UserStatusID_AccountStatus" Association="Self.FK_UserStatusID_AccountStatus">
+      <End Role="AccountStatus" EntitySet="AccountStatus" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRankID_Ranks" Association="Self.FK_UserRankID_Ranks">
+      <End Role="Ranks" EntitySet="Ranks" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

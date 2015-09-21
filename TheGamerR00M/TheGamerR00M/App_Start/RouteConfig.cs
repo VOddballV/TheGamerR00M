@@ -32,6 +32,12 @@ namespace TheGamerR00M
             );
 
             routes.MapRoute(
+                name: "LogIn",
+                url: "Login",
+                defaults: new { controller = "LogIn", action = "Index", }
+            );
+
+            routes.MapRoute(
                 name: "PageNotFound",
                 url: "Oops",
                 defaults: new { controller = "Home", action = "PageNotFound", }

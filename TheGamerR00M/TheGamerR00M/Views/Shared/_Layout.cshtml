@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model TheGamerR00M.Models.UserModel
+<!DOCTYPE html>
 <html>
 <head>
     @*<base href="http://gamerr00m.org/#!/" />*@
@@ -41,8 +42,16 @@
                 <div class="navbar-collapse collapse">
                     <ul id="SubMenu" class="nav navbar-nav">
                         <li id="Home" onclick="closeSub();" hidden="hidden">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Index", "Reviews", new { area = "" }, null)</li>                        
+                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Index", "Reviews", new { area = "" }, null)</li>   
+                        <li id="LogIn" onclick="closeSub();">@Html.ActionLink("Log In", "Index", "LogIn", new { area = "" }, null)</li>                       
                     </ul>
+                    <span>
+                        @if (Model.UserName != null)
+                        {
+                            string name = Model.UserName;
+                            @Html.ActionLink((string) name, "Index", "Account", new { area = "" }, null)
+                        }   
+                    </span>
                 </div>
             </div>
         </div>

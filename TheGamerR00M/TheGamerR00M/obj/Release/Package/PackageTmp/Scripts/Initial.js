@@ -1,6 +1,10 @@
 ﻿var blnHasLoaded = false
 var windowsize = $(window).width();
-hasLoaded();
+// Preload animation run
+$(window).load(function () {
+    hasLoaded();
+});
+
 
 if (window.onload = true && blnHasLoaded == false) {
     blnHasLoaded = true
@@ -36,10 +40,7 @@ function closeSub() {
 function hasLoaded() {
     //  Check Width of Screen
     $(window).resize(checkWidth)
-    // Preload animation run
-    $(window).load(function () {
-        // Animate loader off screen
-        $('body').addClass('loaded');
-        console.log("Made it")        
-    });
+    // Animate loader off screen
+    $('body').addClass('loaded');
+    console.log("Made it")        
 }
