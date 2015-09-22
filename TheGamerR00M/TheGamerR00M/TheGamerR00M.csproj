@@ -201,7 +201,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
-    <Compile Include="Controllers\ReviewsController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="DB\AccountStatu.cs">
       <DependentUpon>Users.tt</DependentUpon>
     </Compile>
@@ -319,15 +319,17 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Posts\Reviews.cshtml" />
     <Content Include="Views\Home\PageNotFound.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\LogIn\Register.cshtml" />
+    <Content Include="Views\Posts\Stories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\NewFolder1\" />
+    <Folder Include="Views\Reviews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

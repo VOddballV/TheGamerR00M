@@ -28,7 +28,13 @@ namespace TheGamerR00M
             routes.MapRoute(
                 name: "Reviews",
                 url: "Reviews",
-                defaults: new { controller = "Reviews", action = "Index", }
+                defaults: new { controller = "Posts", action = "Reviews", }
+            );
+
+            routes.MapRoute(
+                name: "Stories",
+                url: "Stories",
+                defaults: new { controller = "Posts", action = "Stories", }
             );
 
             routes.MapRoute(
