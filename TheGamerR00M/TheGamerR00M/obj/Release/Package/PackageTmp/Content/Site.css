@@ -178,12 +178,6 @@ h1 {
     to {left: 50%; opacity: 1;}
 }
 
-/*@media (min-width: 768px) {
-    #Home {
-        display: block;
-    }
-}*/
-
 /*#Home {
     display: none;
 }*/
@@ -193,4 +187,62 @@ h1 {
     background: none;
     border: none;
     outline:none
+}
+
+#loginForm{
+    position: center;
+    border-radius: 25px;
+    border: 5px solid red;
+    border-right: 100px;
+    border-left: 100px;
+    height: auto;
+    overflow:auto;
+}
+
+#userLogin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: lightgray;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-right: solid 5px red;
+    height: 250px;
+}
+
+#userReg{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: lightgray;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    height: 250px;
+}
+
+#UserPass{
+    margin-left: 20px;
+}
+
+#Reg{
+    margin-left: 20px;
+}
+
+.nav-bar-MyAccount {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    #userLogin {
+        border-radius: 25px;
+        border: none;
+    }
+    #userReg {
+        border-radius: 25px;
+    }
+    .nav-bar-MyAccount {
+    text-align: left;
+    }
 }

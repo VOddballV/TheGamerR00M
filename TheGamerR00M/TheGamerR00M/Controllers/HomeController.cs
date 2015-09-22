@@ -8,32 +8,16 @@ namespace TheGamerR00M.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(Models.UserModel UserInfo)
+        public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            //  If you're not a user then just return home view
-            if (UserInfo.UserName == null)
-            {
-                return View();
-            }
-            //  Else Set users name
-            else
-            {
-                return View(UserInfo);
-            }
+
+            return View();
         }
 
-        public ActionResult PageNotFound(Models.UserModel UserInfo)
+        public ActionResult PageNotFound()
         {
-            if (UserInfo.UserName == null)
-            {
                 return View();
-            }
-            //  Else Set users name
-            else
-            {
-                return View(UserInfo);
-            }
         }
 
         public ActionResult Error()

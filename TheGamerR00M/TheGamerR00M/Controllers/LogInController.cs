@@ -36,8 +36,14 @@ namespace TheGamerR00M.Controllers
                 TempData.Add("errorInvalid", "Invalid Password");
                 return View("Index");               
             }
+            Session["UserID"] = UserInfo.UserID.ToString();
+            Session["UserEmail"] = UserInfo.UserEmail.ToString();
+            Session["UserName"] = UserInfo.UserName.ToString();
+            Session["UserRankID"] = UserInfo.UserRankID.ToString();
+            Session["UserStatusID"] = UserInfo.UserStatusID.ToString();
+
             //  Find user and validate 
-            return RedirectToRoute("Home", UserInfo);
+            return RedirectToRoute("Home");
         }
 
         private UserModel UserDetail(string username)
