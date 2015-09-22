@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TheGamerR00M.Models;
 
 namespace TheGamerR00M.Controllers
 {
     public class AccountController : Controller
     {
+        UserModel UserInfo = new UserModel();
         // GET: Account
-        public ActionResult Index(Models.UserModel UserInfo)
+        public ActionResult Index()
         {
-            return View(UserInfo);
+            if (Session.Count == 0)
+            {
+                return RedirectToRoute("Home");
+            }
+            else
+            {
+                UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
+                UserInfo.UserEmail = Session["UserEmail"].ToString();
+                UserInfo.UserName = Session["UserName"].ToString();
+                UserInfo.UserRankID = Convert.ToInt32(Session["UserRankID"]);
+                UserInfo.UserStatusID = Convert.ToInt32(Session["UserStatusID"]);
+                return View(UserInfo);
+            }
         }
     }
 }

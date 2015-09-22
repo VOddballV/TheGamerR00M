@@ -323,6 +323,7 @@
     <Content Include="Views\Home\PageNotFound.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\LogIn\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

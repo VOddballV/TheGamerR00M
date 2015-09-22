@@ -75,7 +75,7 @@ textarea {
 }*/
 
 #loader {
-    z-index: 1001; /* anything higher than z-index: 1000 of .loader-section */
+    z-index: 2001; /* anything higher than z-index: 1000 of .loader-section */
 }
 h1 {
     color: #EEEEEE;
@@ -87,7 +87,7 @@ h1 {
     width: 2000px;
     height: 1000px;
     background: #222222;
-    z-index: 1000;
+    z-index: 2000;
 }
  
 #loader-wrapper .loader-section.section-left {
@@ -209,6 +209,7 @@ h1 {
     border-bottom-left-radius: 25px;
     border-right: solid 5px red;
     height: 250px;
+    z-index: 1;
 }
 
 #userReg{
@@ -220,14 +221,15 @@ h1 {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     height: 250px;
+    z-index: 1;
 }
 
 #UserPass{
-    margin-left: 20px;
+    margin-left: 7px;
 }
 
 #Reg{
-    margin-left: 20px;
+    margin-left: 7px;
 }
 
 .nav-bar-MyAccount {
@@ -245,4 +247,17 @@ h1 {
     .nav-bar-MyAccount {
     text-align: left;
     }
+}
+
+#RegisterTextField{
+    text-align: center;
+}
+
+.modal {
+    position: center;
+}
+
+.modal-content {
+    margin-left: 23%;
+    width: 300px;
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using TheGamerR00M.Models;
@@ -16,7 +17,8 @@ namespace TheGamerR00M.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Models.UserModel UserInfo)
+        [MultipleButton(Name = "action", Argument = "LogIn")]
+        public ActionResult LogIn(Models.UserModel UserInfo) 
         {
             //Check new password with confirmed password
             var UserName = Request.Form["UserName"];
@@ -34,7 +36,7 @@ namespace TheGamerR00M.Controllers
             {
                 TempData = null;
                 TempData.Add("errorInvalid", "Invalid Password");
-                return View("Index");               
+                return View("Index");
             }
             Session["UserID"] = UserInfo.UserID.ToString();
             Session["UserEmail"] = UserInfo.UserEmail.ToString();
@@ -45,6 +47,42 @@ namespace TheGamerR00M.Controllers
             //  Find user and validate 
             return RedirectToRoute("Home");
         }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "Register")]
+        public ActionResult Register(Models.UserModel UserInfo)
+        {
+            var UserName = Request.Form["UserName"];
+            var Password = Request.Form["Password"];
+            var ConfirmPass = Request.Form["ConfirmPassword"];
+            var UserEmail = Request.Form["UserEmail"];
+            
+            //  Get list of UserNames
+            List<UserModel> users = lstUsers();
+
+            foreach (var item in users)
+            {
+                if (item.UserName == UserName)
+                {
+                    TempData = null;
+                    TempData.Add("errorInvalid", "Username already in use");
+                    return View("Index");
+                }
+            }
+
+            if (Password != ConfirmPass)
+            {
+                TempData = null;
+                TempData.Add("errorInvalid", "Passwords do not match");
+                return View("Index");
+            }
+
+            //  Create the user
+            CreateUser(UserName, Password, UserEmail);
+
+            return RedirectToRoute("Home");
+        }
+
 
         private UserModel UserDetail(string username)
         {
@@ -68,6 +106,76 @@ namespace TheGamerR00M.Controllers
                 
             }
             return UserInfo;
+        }
+
+        private List<UserModel> lstUsers()
+        {
+            List<UserModel> UserInfo = new List<UserModel>();
+            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
+            {
+                //DataSet dsTemp = null;
+                var query = db.Users.Select(x => x.UserName);
+
+                foreach(var user in query){
+                        UserModel item = new UserModel();
+                        item.UserName = user;
+                        UserInfo.Add(item);
+                }
+            }
+            return UserInfo;
+        }
+
+        private void CreateUser(string username, string password, string email)
+        {   
+            DB.User UserInfo = new DB.User();
+            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
+            {
+                
+                //  Get count of users to set userid
+                int userCount = db.Users.Select(x => x.UserName).Count();
+                //  Set Users info
+                UserInfo.UserName = username;
+                UserInfo.UserPass = password;
+                UserInfo.UserEmail = email;
+                UserInfo.UserRankID = 3;
+                UserInfo.UserStatusID = 1;
+                UserInfo.UserID = userCount + 1;
+                //  Insert into Users table
+                db.Users.Add(UserInfo);
+                //  Save user info in DB
+                db.SaveChanges();
+            }
+            //  log user in and create a session
+            Session["UserID"] = UserInfo.UserID.ToString();
+            Session["UserEmail"] = UserInfo.UserEmail.ToString();
+            Session["UserName"] = UserInfo.UserName.ToString();
+            Session["UserRankID"] = UserInfo.UserRankID.ToString();
+            Session["UserStatusID"] = UserInfo.UserStatusID.ToString();
+        }
+
+        //
+        //  Handles multiple submit buttons
+        //
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+        public class MultipleButtonAttribute : ActionNameSelectorAttribute
+        {
+            public string Name { get; set; }
+            public string Argument { get; set; }
+
+            public override bool IsValidName(ControllerContext controllerContext, string actionName, MethodInfo methodInfo)
+            {
+                var isValidName = false;
+                var keyValue = string.Format("{0}:{1}", Name, Argument);
+                var value = controllerContext.Controller.ValueProvider.GetValue(keyValue);
+
+                if (value != null)
+                {
+                    controllerContext.Controller.ControllerContext.RouteData.Values[Name] = Argument;
+                    isValidName = true;
+                }
+
+                return isValidName;
+            }
         }
     }
 }
