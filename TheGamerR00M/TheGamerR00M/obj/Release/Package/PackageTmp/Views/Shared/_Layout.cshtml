@@ -41,7 +41,8 @@
                 <div class="navbar-collapse collapse">
                     <ul id="SubMenu" class="nav navbar-nav">
                         <li id="Home" onclick="closeSub();" hidden="hidden">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Index", "Reviews", new { area = "" }, null)</li> 
+                        <li id="Reviews" onclick="closeSub();" >@Html.ActionLink("Reviews", "Reviews", "Posts", new { area = "" }, null)</li> 
+                        <li id="Reviews" onclick="closeSub();">@Html.ActionLink("Stories", "Stories", "Posts", new { area = "" }, null)</li> 
                         @if (HttpContext.Current.Session.Count > 0)
                         {
                             var userName = HttpContext.Current.Session["UserName"];
