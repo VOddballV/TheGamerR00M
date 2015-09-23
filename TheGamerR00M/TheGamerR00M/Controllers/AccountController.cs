@@ -13,12 +13,14 @@ namespace TheGamerR00M.Controllers
         // GET: Account
         public ActionResult Index()
         {
+            //  If user is not logged in send to Home
             if (Session.Count == 0)
             {
                 return RedirectToRoute("Home");
             }
             else
             {
+                //  Set users info from session data
                 UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
                 UserInfo.UserEmail = Session["UserEmail"].ToString();
                 UserInfo.UserName = Session["UserName"].ToString();

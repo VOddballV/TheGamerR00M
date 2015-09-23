@@ -23,6 +23,7 @@ namespace TheGamerR00M.Controllers
             //Check new password with confirmed password
             var UserName = Request.Form["UserName"];
             var Password = Request.Form["Password"];
+            //  Get users info and set model
             UserInfo = UserDetail(UserName);
             // Is that userName valid
             if (UserInfo == null)
@@ -38,6 +39,7 @@ namespace TheGamerR00M.Controllers
                 TempData.Add("errorInvalid", "Invalid Password");
                 return View("Index");
             }
+            //  Set users session data
             Session["UserID"] = UserInfo.UserID.ToString();
             Session["UserEmail"] = UserInfo.UserEmail.ToString();
             Session["UserName"] = UserInfo.UserName.ToString();
@@ -52,6 +54,7 @@ namespace TheGamerR00M.Controllers
         [MultipleButton(Name = "action", Argument = "Register")]
         public ActionResult Register(Models.UserModel UserInfo)
         {
+            //  Get form data
             var UserName = Request.Form["UserName"];
             var Password = Request.Form["Password"];
             var ConfirmPass = Request.Form["ConfirmPassword"];
@@ -60,6 +63,7 @@ namespace TheGamerR00M.Controllers
             //  Get list of UserNames
             List<UserModel> users = lstUsers();
 
+            //  Check to see if username is in use
             foreach (var item in users)
             {
                 if (item.UserName == UserName)
@@ -69,7 +73,7 @@ namespace TheGamerR00M.Controllers
                     return View("Index");
                 }
             }
-
+            //  Check to see if Password check is valid
             if (Password != ConfirmPass)
             {
                 TempData = null;
@@ -89,7 +93,7 @@ namespace TheGamerR00M.Controllers
             UserModel UserInfo = new UserModel();
             using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
             {
-                //DataSet dsTemp = null;
+                //  Get Users info
                 var query = db.Users.Where(x=> x.UserName == username).FirstOrDefault();
                 //  If user is not found return null
                 if (query.UserID == 0)
@@ -113,9 +117,9 @@ namespace TheGamerR00M.Controllers
             List<UserModel> UserInfo = new List<UserModel>();
             using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
             {
-                //DataSet dsTemp = null;
+                //  Get list of usernames
                 var query = db.Users.Select(x => x.UserName);
-
+                //  Add all usernames to list
                 foreach(var user in query){
                         UserModel item = new UserModel();
                         item.UserName = user;
@@ -153,9 +157,10 @@ namespace TheGamerR00M.Controllers
             Session["UserStatusID"] = UserInfo.UserStatusID.ToString();
         }
 
-        //
-        //  Handles multiple submit buttons
-        //
+        /*
+              Handles multiple submit buttons
+              Do not take credit for this class
+        */
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
         public class MultipleButtonAttribute : ActionNameSelectorAttribute
         {
