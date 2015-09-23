@@ -202,7 +202,6 @@ h1 {
 #userLogin{
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: lightgray;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     border-top-left-radius: 25px;
@@ -215,7 +214,6 @@ h1 {
 #userReg{
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: lightgray;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 25px;
