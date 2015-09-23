@@ -4,7 +4,7 @@
 }
 
 <h2>Login Page</h2>
-<div id="loginForm">
+<div class="basic-Form">
     @if (TempData.ContainsKey("errorInvalid"))
     {
         <div class="alert alert-danger text-center" style="margin-top: 15px;">
@@ -12,6 +12,7 @@
         </div>
     }
     <div style="margin-left: 10px; margin-right: 10px">
+        <div class="con"></div>
         <div id="userLogin" class="col-sm-6">
             <div id="UserPass">
                 <br />

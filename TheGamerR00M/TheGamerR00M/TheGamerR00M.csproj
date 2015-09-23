@@ -325,6 +325,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\LogIn\Register.cshtml" />
     <Content Include="Views\Posts\Stories.cshtml" />
+    <Content Include="Views\Posts\NewPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

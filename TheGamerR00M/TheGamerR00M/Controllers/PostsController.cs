@@ -47,6 +47,24 @@ namespace TheGamerR00M.Controllers
             }
         }
 
+        public ActionResult NewPost()
+        {
+            // Get the users ID from session data
+            UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
+            // If user id is null return normal view
+            if (UserInfo.UserID == 0)
+            {
+                return View();
+            }
+            //  Else Return view of poster
+            else
+            {
+                //  Get users updated information and set model
+                getUserDetails(UserInfo.UserID);
+                return View();
+            }
+        }
+
         private UserModel getUserDetails(int userID)
         {
             using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())

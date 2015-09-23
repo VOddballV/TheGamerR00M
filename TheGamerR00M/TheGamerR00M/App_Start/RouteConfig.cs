@@ -38,6 +38,12 @@ namespace TheGamerR00M
             );
 
             routes.MapRoute(
+                name: "NewPost",
+                url: "NewPost",
+                defaults: new { controller = "Posts", action = "NewPost", }
+            );
+
+            routes.MapRoute(
                 name: "LogIn",
                 url: "Login",
                 defaults: new { controller = "LogIn", action = "Index", }

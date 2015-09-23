@@ -48,6 +48,7 @@
                             var userName = HttpContext.Current.Session["UserName"];
                             userName = userName.ToString();
                             <li id="Account" onclick="closeSub();">@Html.ActionLink((string)userName, "Index", "Account", new { area = "" }, new { @class = "nav-bar-MyAccount" })</li>
+                            <li id="AddPost" onclick="closeSub();">@Html.ActionLink("+ New Post", "NewPost", "Posts", new { area = "" }, null)</li>
                         }
                         else
                         {

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "New Post";
+}
+
+<h2>Create New Post</h2>
+<div class="basic-Form">
+    <div style="margin-left: 10px; margin-right: 10px">
+        <div id="newPost">
+            <input type="text" class="form-control input-lg" name="PostTitle" id="posttitle" placeholder="Title..." required="">
+            <br/>
+            <div class="form-group">
+                <textarea class="form-control" rows="10" id="postBody" placeholder="Body..."></textarea>
+            </div>
+            @* Dropdown *@
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    <h4>Type</h4>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                </ul>
+            </div>
+            @* End of dropdown *@
+        </div>
+    </div>
+</div>
