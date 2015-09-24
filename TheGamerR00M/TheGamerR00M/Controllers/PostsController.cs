@@ -78,7 +78,7 @@ namespace TheGamerR00M.Controllers
             //string pattern= Regex.Match(path, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
             //  Give Picture a unique ID
             var myUniqueFileName = string.Format(@"{0}.jpeg", Guid.NewGuid());
-            return View();
+            return RedirectToRoute("Home");
         }
 
         private UserModel getUserDetails(int userID)
