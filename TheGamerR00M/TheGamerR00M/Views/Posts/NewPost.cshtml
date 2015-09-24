@@ -6,17 +6,15 @@
 <h2>Create New Post</h2>
 <div class="basic-Form">
     <div style="margin-left: 10px; margin-right: 10px">
+        @using (Html.BeginForm()) {
         <div id="newPost">
             @* Dropdown *@
             <div class="form-group">
-                <label class="control-label">Type of post</label>
-                <br />
                 <div class="selectContainer" style="width: 350px">
                     <select class="form-control" name="type" required="">
-                        <option value="">Choose Type...</option>
-                        <option value="black">Black</option>
-                        <option value="green">Green</option>
-                        <option value="red">Red</option>
+                        <option value="">Choose Type of post...</option>
+                        <option value="black">Story</option>
+                        <option value="green">Review</option>
                     </select>
                 </div>
             </div>
@@ -46,6 +44,7 @@
             </div>
             <button type="submit" value="Submit" name="submit" class="btn block full-width m-b">Submit</button>
         </div>
+        }
     </div>
 </div>
 
