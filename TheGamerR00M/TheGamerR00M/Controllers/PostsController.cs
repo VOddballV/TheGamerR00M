@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TheGamerR00M.Models;
@@ -51,8 +52,10 @@ namespace TheGamerR00M.Controllers
         {
             // Get the users ID from session data
             UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
+            UserInfo.UserRankID = Convert.ToInt32(Session["UserRankID"]);
             // If user id is null return normal view
-            if (UserInfo.UserID == 0)
+            // Or if User doesn't have the rights
+            if (UserInfo.UserID == 0 || UserInfo.UserRankID == 3)
             {
                 return RedirectToRoute("Home");
             }
@@ -67,23 +70,15 @@ namespace TheGamerR00M.Controllers
 
         public ActionResult SavePost()
         {
-            // Get the users ID from session data
-            UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
-            // If user id is null return normal view
-            if (UserInfo.UserID == 0)
-            {
-                return View();
-            }
-            //  Else Return view of poster
-            else
-            {
-                //  Get users updated information and set model
-                getUserDetails(UserInfo.UserID);
+            //  Get form data
+            var UserName = Request.Form["PostType"];
+            var Password = Request.Form["PostTitle"];
+            var ConfirmPass = Request.Form["PostBody"];
 
-                var myUniqueFileName = string.Format(@"{0}.jpeg", Guid.NewGuid());
-
-                return View();
-            }
+            //string pattern= Regex.Match(path, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
+            //  Give Picture a unique ID
+            var myUniqueFileName = string.Format(@"{0}.jpeg", Guid.NewGuid());
+            return View();
         }
 
         private UserModel getUserDetails(int userID)

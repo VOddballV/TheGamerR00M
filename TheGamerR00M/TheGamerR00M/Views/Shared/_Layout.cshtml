@@ -45,9 +45,10 @@
                         <li id="Reviews" onclick="closeSub();">@Html.ActionLink("Stories", "Stories", "Posts", new { area = "" }, null)</li> 
                         @if (HttpContext.Current.Session.Count > 0)
                         {
-                            var userName = HttpContext.Current.Session["UserName"];
-                            userName = userName.ToString();
+                            var userName = HttpContext.Current.Session["UserName"].ToString();
+                            var userRank = HttpContext.Current.Session["UserRankID"].ToString();
                             <li id="Account" onclick="closeSub();">@Html.ActionLink((string)userName, "Index", "Account", new { area = "" }, new { @class = "nav-bar-MyAccount" })</li>
+                            if ((userRank == "1") || (userRank == "2"))
                             <li id="AddPost" onclick="closeSub();">@Html.ActionLink("+ New Post", "NewPost", "Posts", new { area = "" }, null)</li>
                         }
                         else
