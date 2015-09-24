@@ -10,11 +10,11 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/
 
 /*#leftPanel{
     float: left;
@@ -265,4 +265,28 @@ h1 {
     margin-bottom: 30px;
     height: auto;
     z-index: 1;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  background-color: lightgray
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
 }

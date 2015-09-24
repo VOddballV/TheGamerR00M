@@ -59,10 +59,8 @@ namespace TheGamerR00M.Controllers
             var Password = Request.Form["Password"];
             var ConfirmPass = Request.Form["ConfirmPassword"];
             var UserEmail = Request.Form["UserEmail"];
-            
             //  Get list of UserNames
             List<UserModel> users = lstUsers();
-
             //  Check to see if username is in use
             foreach (var item in users)
             {
@@ -80,10 +78,8 @@ namespace TheGamerR00M.Controllers
                 TempData.Add("errorInvalid", "Passwords do not match");
                 return View("Index");
             }
-
             //  Create the user
             CreateUser(UserName, Password, UserEmail);
-
             return RedirectToRoute("Home");
         }
 
@@ -107,7 +103,6 @@ namespace TheGamerR00M.Controllers
                 UserInfo.UserPass = query.UserPass;
                 UserInfo.UserRankID = query.UserRankID;
                 UserInfo.UserStatusID = query.UserStatusID;
-                
             }
             return UserInfo;
         }
@@ -158,8 +153,8 @@ namespace TheGamerR00M.Controllers
         }
 
         /*
-              Handles multiple submit buttons
-              Do not take credit for this class
+            Handles multiple submit buttons
+            Do not take credit for this class
         */
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
         public class MultipleButtonAttribute : ActionNameSelectorAttribute

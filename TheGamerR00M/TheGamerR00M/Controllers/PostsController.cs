@@ -54,6 +54,24 @@ namespace TheGamerR00M.Controllers
             // If user id is null return normal view
             if (UserInfo.UserID == 0)
             {
+                return RedirectToRoute("Home");
+            }
+            //  Else Return view of poster
+            else
+            {
+                //  Get users updated information and set model
+                getUserDetails(UserInfo.UserID);
+                return View();
+            }
+        }
+
+        public ActionResult SavePost()
+        {
+            // Get the users ID from session data
+            UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
+            // If user id is null return normal view
+            if (UserInfo.UserID == 0)
+            {
                 return View();
             }
             //  Else Return view of poster
@@ -61,6 +79,9 @@ namespace TheGamerR00M.Controllers
             {
                 //  Get users updated information and set model
                 getUserDetails(UserInfo.UserID);
+
+                var myUniqueFileName = string.Format(@"{0}.jpeg", Guid.NewGuid());
+
                 return View();
             }
         }

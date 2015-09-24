@@ -42,5 +42,4 @@ function hasLoaded() {
     $(window).resize(checkWidth)
     // Animate loader off screen
     $('body').addClass('loaded');
-    console.log("Made it")        
 }

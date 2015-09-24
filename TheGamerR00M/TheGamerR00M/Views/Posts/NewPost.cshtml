@@ -7,24 +7,46 @@
 <div class="basic-Form">
     <div style="margin-left: 10px; margin-right: 10px">
         <div id="newPost">
-            <input type="text" class="form-control input-lg" name="PostTitle" id="posttitle" placeholder="Title..." required="">
-            <br/>
-            <div class="form-group">
-                <textarea class="form-control" rows="10" id="postBody" placeholder="Body..."></textarea>
-            </div>
             @* Dropdown *@
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                    <h4>Type</h4>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">HTML</a></li>
-                    <li><a href="#">CSS</a></li>
-                    <li><a href="#">JavaScript</a></li>
-                </ul>
+            <div class="form-group">
+                <label class="control-label">Type of post</label>
+                <br />
+                <div class="selectContainer" style="width: 350px">
+                    <select class="form-control" name="type" required="">
+                        <option value="">Choose Type...</option>
+                        <option value="black">Black</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                    </select>
+                </div>
             </div>
             @* End of dropdown *@
+            <br />
+            <input type="text" class="form-control input-lg" name="PostTitle" id="posttitle" placeholder="Title..." required="" style="width: 350px">
+            <br />
+            @* Browse for image *@
+            <div id="userpic"></div>
+            <label class="control-label">Add image</label>
+            <div class="container" style="margin-top: 20px;">
+                <div class="row">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-file block full-width m-b">
+                                Browse&hellip; <input type="file" accept="image/x-png, image/jpeg, image/png" style="width: 350px">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+            @* End of browse for image *@
+            <br/>
+            <div class="form-group">
+                <textarea class="form-control" rows="10" id="postBody" placeholder="Body..." required="" style="resize: vertical"></textarea>
+            </div>
+            <button type="submit" value="Submit" name="submit" class="btn block full-width m-b">Submit</button>
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/NewPost.js"></script>
