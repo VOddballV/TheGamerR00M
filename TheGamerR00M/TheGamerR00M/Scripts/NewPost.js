@@ -13,9 +13,14 @@
     var reader = new FileReader();
     var name = input.value;
     reader.onload = function (e) {
-        $("#userpic").append("<img src='" + e.target.result + "' name='postImage'/>");
+        $("#userpic").append("<img src='" + e.target.result + "' name='PostImage' width='300' height='200'/>");
     };
     reader.readAsDataURL(file);
+
+    $("#userpic").each(function () {
+        var $img = $(this);
+        $img.width($img.width() * .5);
+    });
 });
 
 $(document).ready(function () {

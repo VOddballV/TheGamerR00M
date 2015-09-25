@@ -116,9 +116,9 @@ namespace TheGamerR00M.Controllers
                 var query = db.Users.Select(x => x.UserName);
                 //  Add all usernames to list
                 foreach(var user in query){
-                        UserModel item = new UserModel();
-                        item.UserName = user;
-                        UserInfo.Add(item);
+                    UserModel item = new UserModel();
+                    item.UserName = user;
+                    UserInfo.Add(item);
                 }
             }
             return UserInfo;

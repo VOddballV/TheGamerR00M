@@ -28,5 +28,6 @@ namespace TheGamerR00M.DB
         public virtual DbSet<AccountStatu> AccountStatus { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UsersPost> UsersPosts { get; set; }
     }
 }

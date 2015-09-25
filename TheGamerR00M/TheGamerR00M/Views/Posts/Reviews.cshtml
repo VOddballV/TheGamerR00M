@@ -1,7 +1,20 @@
-﻿
+﻿@model List<TheGamerR00M.Models.PostModel>
 @{
     ViewBag.Title = "Reviews";
 }
 
 <h2>Reviews</h2>
+<div class="Posts">
+    @foreach (var post in Model)
+    {
+        <div>
+            <h3>
+                @Html.ActionLink(post.PostTitle, "gotoPost", "Posts", new {StoryOrReview = ViewBag.Title, postID = post.PostID }, null)
+            </h3>
+            <br/>
+            <img src="@post.PostImageURL"/>
+        </div>
+        <br />
+    }
+</div>
 

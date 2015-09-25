@@ -1,4 +1,4 @@
-﻿
+﻿@model  TheGamerR00M.Models.UserModel
 @{
     ViewBag.Title = "New Post";
 }
@@ -6,15 +6,17 @@
 <h2>Create New Post</h2>
 <div class="basic-Form">
     <div style="margin-left: 10px; margin-right: 10px">
-        @using (Html.BeginForm()) {
         <div id="newPost">
+            @using (Html.BeginForm("SavePost", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            @Html.HiddenFor(x => x.UserID)
             @* Dropdown *@
             <div class="form-group">
                 <div class="selectContainer" style="width: 350px">
-                    <select class="form-control" name="type" required="">
+                    <select class="form-control" name="PostType" required="">
                         <option value="">Choose Type of post...</option>
-                        <option value="black">Story</option>
-                        <option value="green">Review</option>
+                        <option value="Stories">Story</option>
+                        <option value="Reviews">Review</option>
                     </select>
                 </div>
             </div>
@@ -24,27 +26,26 @@
             <br />
             @* Browse for image *@
             <div id="userpic"></div>
-            <label class="control-label">Add image</label>
             <div class="container" style="margin-top: 20px;">
                 <div class="row">
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-file block full-width m-b">
-                                Browse&hellip; <input type="file" accept="image/x-png, image/jpeg, image/png" style="width: 350px">
+                                Browse&hellip; <input type="file" accept="image/x-png, image/jpeg, image/png" name="file" id="file" style="width: 350px">
                             </span>
                         </span>
-                        <input type="text" class="form-control" readonly>
+                        <input type="text" class="form-control" readonly placeholder="Add Image">
                     </div>
                 </div>
             </div>
             @* End of browse for image *@
             <br/>
             <div class="form-group">
-                <textarea class="form-control" rows="10" id="postBody" placeholder="Body..." required="" style="resize: vertical"></textarea>
+                <textarea class="form-control" rows="10" id="postBody" name="PostBody" placeholder="Body..." required="" style="resize: vertical"></textarea>
             </div>
-            <button type="submit" value="Submit" name="submit" class="btn block full-width m-b">Submit</button>
+            <button type="submit" class="btn block full-width m-b">Submit</button>
+            }
         </div>
-        }
     </div>
 </div>
 

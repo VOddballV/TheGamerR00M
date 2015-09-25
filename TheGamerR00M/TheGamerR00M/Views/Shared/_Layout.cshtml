@@ -48,8 +48,10 @@
                             var userName = HttpContext.Current.Session["UserName"].ToString();
                             var userRank = HttpContext.Current.Session["UserRankID"].ToString();
                             <li id="Account" onclick="closeSub();">@Html.ActionLink((string)userName, "Index", "Account", new { area = "" }, new { @class = "nav-bar-MyAccount" })</li>
-                            if ((userRank == "1") || (userRank == "2"))
+                            if ((userRank == "1") || (userRank == "2")) 
+                            { 
                             <li id="AddPost" onclick="closeSub();">@Html.ActionLink("+ New Post", "NewPost", "Posts", new { area = "" }, null)</li>
+                            }
                         }
                         else
                         {

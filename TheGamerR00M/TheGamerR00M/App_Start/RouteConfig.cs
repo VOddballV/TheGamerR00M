@@ -44,6 +44,18 @@ namespace TheGamerR00M
             );
 
             routes.MapRoute(
+                name: "SavePost",
+                url: "SavePost",
+                defaults: new { controller = "Posts", action = "SavePost", }
+            );
+
+            routes.MapRoute(
+                name: "gotoPost",
+                url: "{StoryOrReview}/{postID}",
+                defaults: new { controller = "Posts", action = "gotoPost"}
+            );
+
+            routes.MapRoute(
                 name: "LogIn",
                 url: "Login",
                 defaults: new { controller = "LogIn", action = "Index", }
@@ -70,7 +82,7 @@ namespace TheGamerR00M
             routes.MapRoute(
                 name: "Default1",
                 url: "{controller}/{action}",
-                defaults: new { controller = "Home", action = "index"}
+                defaults: new { controller = "Home", action = "index" }
             );
 
             routes.MapRoute(

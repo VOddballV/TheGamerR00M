@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_9D88FA_TheGamerR00MModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_9D88FA_TheGamerR00MModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountStatus">
           <Key>
             <PropertyRef Name="StatusID" />
@@ -30,6 +30,19 @@
           <Property Name="UserRankID" Type="int" Nullable="false" />
           <Property Name="UserStatusID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UsersPosts">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="PostTypeID" Type="int" Nullable="false" />
+          <Property Name="PostTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostImageURL" Type="varchar(max)" />
+          <Property Name="PostBody" Type="varchar(max)" Nullable="false" />
+          <Property Name="Post_CDate" Type="datetime" Nullable="false" />
+          <Property Name="Post_CUserID" Type="int" Nullable="false" />
+          <Property Name="PostTags" Type="varchar(max)" />
+        </EntityType>
         <Association Name="FK_UserRankID_Ranks">
           <End Role="Ranks" Type="Self.Ranks" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -39,6 +52,18 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="UserRankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersPosts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UsersPosts" Type="Self.UsersPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UsersPosts">
+              <PropertyRef Name="Post_CUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -58,17 +83,21 @@
           <EntitySet Name="AccountStatus" EntityType="Self.AccountStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ranks" EntityType="Self.Ranks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersPosts" EntityType="Self.UsersPosts" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_UserRankID_Ranks" Association="Self.FK_UserRankID_Ranks">
             <End Role="Ranks" EntitySet="Ranks" />
             <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersPosts_Users" Association="Self.FK_UsersPosts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersPosts" EntitySet="UsersPosts" />
           </AssociationSet>
           <AssociationSet Name="FK_UserStatusID_AccountStatus" Association="Self.FK_UserStatusID_AccountStatus">
             <End Role="AccountStatus" EntitySet="AccountStatus" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_9D88FA_TheGamerR00MModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -100,6 +129,7 @@
           <Property Name="UserStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccountStatu" Relationship="Self.FK_UserStatusID_AccountStatus" FromRole="Users" ToRole="AccountStatus" />
           <NavigationProperty Name="Rank" Relationship="Self.FK_UserRankID_Ranks" FromRole="Users" ToRole="Ranks" />
+          <NavigationProperty Name="UsersPosts" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UsersPosts_Users" FromRole="User" ToRole="UsersPost" />
         </EntityType>
         <Association Name="FK_UserStatusID_AccountStatus">
           <End Role="AccountStatus" Type="Self.AccountStatu" Multiplicity="1" />
@@ -137,7 +167,38 @@
             <End Role="Ranks" EntitySet="Ranks" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="UsersPosts" EntityType="DB_9D88FA_TheGamerR00MModel.UsersPost" />
+          <AssociationSet Name="FK_UsersPosts_Users" Association="DB_9D88FA_TheGamerR00MModel.FK_UsersPosts_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UsersPost" EntitySet="UsersPosts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="UsersPost">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="PostTypeID" Type="Int32" Nullable="false" />
+          <Property Name="PostTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Post_CDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Post_CUserID" Type="Int32" Nullable="false" />
+          <Property Name="PostTags" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UsersPosts_Users" FromRole="UsersPost" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UsersPosts_Users">
+          <End Type="DB_9D88FA_TheGamerR00MModel.User" Role="User" Multiplicity="1" />
+          <End Type="DB_9D88FA_TheGamerR00MModel.UsersPost" Role="UsersPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UsersPost">
+              <PropertyRef Name="Post_CUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -169,6 +230,20 @@
                 <ScalarProperty Name="UserPass" ColumnName="UserPass" />
                 <ScalarProperty Name="UserRankID" ColumnName="UserRankID" />
                 <ScalarProperty Name="UserStatusID" ColumnName="UserStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersPosts">
+            <EntityTypeMapping TypeName="DB_9D88FA_TheGamerR00MModel.UsersPost">
+              <MappingFragment StoreEntitySet="UsersPosts">
+                <ScalarProperty Name="PostTags" ColumnName="PostTags" />
+                <ScalarProperty Name="Post_CUserID" ColumnName="Post_CUserID" />
+                <ScalarProperty Name="Post_CDate" ColumnName="Post_CDate" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostImageURL" ColumnName="PostImageURL" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostTypeID" ColumnName="PostTypeID" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
