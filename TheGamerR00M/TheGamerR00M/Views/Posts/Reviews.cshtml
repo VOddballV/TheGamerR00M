@@ -7,12 +7,22 @@
 <div class="Posts">
     @foreach (var post in Model)
     {
-        <div>
-            <h3>
-                @Html.ActionLink(post.PostTitle, "gotoPost", "Posts", new {StoryOrReview = ViewBag.Title, postID = post.PostID }, null)
-            </h3>
-            <br/>
-            <img src="@post.PostImageURL"/>
+        string hrefURL = "http://www.gamerr00m.org/Reviews/" + @post.PostID;
+        <div class="PostContainer">
+            <div class="PostImageContainer">
+                <a href="@hrefURL">
+                    <img src="@post.PostImageURL" />
+                </a>
+            </div>
+            <div class="PostTitleBody">
+                <h3>
+                    <a href="@hrefURL">@post.PostTitle</a>     
+                </h3>
+                    <h4>@post.Post_Author || @post.Post_CDate</h4>
+                <div class="PostBody">
+                    <p>@Html.Raw(post.PostBody)</p>
+                </div>
+            </div>
         </div>
         <br />
     }

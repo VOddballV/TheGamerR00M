@@ -3,13 +3,17 @@
     ViewBag.Title = "gotoPost";
 }
 <div class="Posts">
-    <img src="@Model.PostImageURL" />
-    <br />
-    <h2>@Model.PostTitle</h2>
-    <div>
-        @Model.PostBody
+    <div class="PostImageContainerInPost">
+        <img id="postPic" src="@Model.PostImageURL" />
     </div>
     <br />
-    @Model.Post_CDate
+    <div class="PostContainerInPost">
+        <h2>@Model.PostTitle</h2>
+        <div>
+            @Html.Raw(Model.PostBody)
+        </div>
+        <br />
+        @Model.Post_Author
+        @Model.Post_CDate
+    </div>
 </div>
-

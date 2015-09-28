@@ -112,7 +112,10 @@ namespace TheGamerR00M.Controllers
             var PostTitle = Request.Form["PostTitle"];
             var PostBody = Request.Form["PostBody"];
             var PostTag = Request.Form["PostTag"];
+            string imageLoadPath = "http://www.gamerr00m.org/ap/";
             int PostTypeID = 0;
+            //  Replace newline with <br/><br/>
+            PostBody = PostBody.Replace(System.Environment.NewLine, "<br />");
             //  Set PostTypeID based on Post type
             if (PostType == "Reviews")
             {
@@ -127,6 +130,7 @@ namespace TheGamerR00M.Controllers
             string  ImageSaveFilePath = siteRoot + "ap\\",
                     myUniqueFileName = string.Format(@"{0}.jpeg", Guid.NewGuid()),
                     fileName = myUniqueFileName;
+            imageLoadPath += fileName;
             ImageSaveFilePath += fileName;
             file.SaveAs(ImageSaveFilePath);
             //  Set temp post object
@@ -139,7 +143,7 @@ namespace TheGamerR00M.Controllers
                 tempPost.Post_CUserID = userInfo.UserID;
                 tempPost.PostBody = PostBody;
                 tempPost.PostID = postCount + 1;
-                tempPost.PostImageURL = ImageSaveFilePath;
+                tempPost.PostImageURL = imageLoadPath;
                 tempPost.PostTags = PostTag;
                 tempPost.PostTitle = PostTitle;
                 tempPost.PostTypeID = PostTypeID;
@@ -193,6 +197,7 @@ namespace TheGamerR00M.Controllers
                     item.PostImageURL = post.PostImageURL;
                     item.PostTags = post.PostTags;
                     item.PostTitle = post.PostTitle;
+                    item.Post_Author = post.User.UserName;
                     //  Add post to postlist
                     PostList.Add(item);
                 }

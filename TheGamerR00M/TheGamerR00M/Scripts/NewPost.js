@@ -37,3 +37,9 @@ $(document).ready(function () {
 
     });
 });
+
+$("#postBody").keydown(function (e) {
+    if (e.keyCode(13)) {
+
+    }; // this value
+});
