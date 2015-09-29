@@ -256,7 +256,6 @@ h1 {
 
     .PostImageContainer img {
         width: 100%;
-
     }
 
     .PostTitleBody {
@@ -375,6 +374,7 @@ input[readonly] {
     float: left;
     overflow: hidden;
     border-radius: 10px;
+    perspective: 1px; 
 }
 
 .PostImageContainerInPost {
@@ -388,6 +388,7 @@ input[readonly] {
 }
 .PostImageContainerInPost img{
     width: 100%;
+
 }
 
 .PostContainerInPost{
@@ -402,8 +403,9 @@ input[readonly] {
 }
 
 .PostImageContainer img {
-    width: 100%;
-    height: 100%;
+    width: 150%;
+    position: relative;
+    right: 50%;
 }
 
 .PostTitleBody {

@@ -185,7 +185,7 @@ namespace TheGamerR00M.Controllers
         {
             using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
             {
-                var query = db.UsersPosts.Where(x => x.PostTypeID == typeID);
+                var query = db.UsersPosts.Where(x => x.PostTypeID == typeID).OrderByDescending(x => x.Post_CDate);
                 //  Assign Values to PostInfo
                 foreach (var post in query)
                 {
