@@ -101,7 +101,7 @@ h1 {
 #content {
     margin: 0 auto;
     padding-bottom: 50px;
-    width: 80%;
+    width: 90%;
     max-width: 978px;
     z-index: 10
 }
@@ -256,7 +256,7 @@ h1 {
 
     .PostImageContainer img {
         width: 100%;
-        height: 100%;
+
     }
 
     .PostTitleBody {
@@ -282,16 +282,38 @@ h1 {
 
     .PostImageContainerInPost {
         margin-top: 20px;
-        width: 264px !important;
-        height: 150px !important;
+        width: auto !important;
+        height: 0px !important;
         display: block;
         position: static !important;
-        overflow: hidden;
+        overflow: visible;
         border-radius: 10px;
+        padding-bottom: 60%;
+        position: absolute;
+            margin-left: 0px;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto !important;
     }
     
     .PostBody {
         display: none;
+    }
+
+    #content {
+        margin: 0 auto;
+        padding-bottom: 50px;
+        width: 100%;
+        max-width: 978px;
+        z-index: 10
+    }
+}
+
+@media all and (max-width: 335px) {
+    #logo {
+        width: 199px
     }
 }
 
@@ -357,11 +379,12 @@ input[readonly] {
 
 .PostImageContainerInPost {
     margin-top: 20px;
-    width: 400px;
-    height: 300px;
+    width: 800px;
+    height: 400px;
     display: block;
     overflow: hidden;
     border-radius: 10px;
+    margin-left: 5%;
 }
 .PostImageContainerInPost img{
     width: 100%;
@@ -406,3 +429,4 @@ a:hover {
     text-decoration:none;
     color: red;
 }
+

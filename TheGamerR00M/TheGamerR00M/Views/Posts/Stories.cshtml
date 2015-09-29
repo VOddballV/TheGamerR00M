@@ -18,7 +18,7 @@
                 <h3>
                     <a href="@hrefURL">@post.PostTitle</a>
                 </h3>
-                    <h4>@post.Post_Author || @post.Post_CDate</h4>
+                    <h4>@post.Post_Author || @Html.Label(post.Post_CDate.ToShortDateString())</h4>
                 <div class="PostBody">
                     <p>@Html.Raw(post.PostBody)</p>
                 </div>
