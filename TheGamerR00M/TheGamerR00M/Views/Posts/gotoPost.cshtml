@@ -3,11 +3,15 @@
     ViewBag.Title = "gotoPost";
     var hrefString = Request.Url.ToString();
 }
-<meta property="og:url" content="@hrefString" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="@Model.PostTitle" />
-<meta property="og:description" content="@Model.PostBody.Replace("<br />", " ")" />
-<meta property="og:image" content="@Model.PostImageURL" />
+
+@section AdditionalMeta
+{
+    <meta property="og:url" content="@hrefString" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@Model.PostTitle" />
+    <meta property="og:description" content="@Model.PostBody.Replace("<br />", " ")" />
+    <meta property="og:image" content="@Model.PostImageURL" />
+}
 
 <div class="Posts">
     <div class="PostImageContainerInPost">
