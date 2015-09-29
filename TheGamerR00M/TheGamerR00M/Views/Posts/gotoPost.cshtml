@@ -1,4 +1,5 @@
 ﻿@model TheGamerR00M.Models.PostModel
+<meta name="description" content="@Model.PostTitle @Model.PostBody.Replace("<br />", " ")">
 @{
     ViewBag.Title = "gotoPost";
 }
@@ -8,10 +9,12 @@
     </div>
     <br />
     <div class="PostContainerInPost">
-        <h2>@Model.PostTitle</h2>
-        <div>
-            @Html.Raw(Model.PostBody)
-        </div>
+        <p>
+            <h2>@Model.PostTitle</h2>
+            <div>
+                @Html.Raw(Model.PostBody)
+            </div>
+        </p>
         <br />
         @Model.Post_Author
         @Model.Post_CDate
