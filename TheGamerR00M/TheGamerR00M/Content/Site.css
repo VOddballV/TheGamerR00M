@@ -440,3 +440,14 @@ a:hover {
     color: red;
 }
 
+#RetroMeBackground{
+    position:fixed;
+    width: 1500px;
+    transform:scaleX(-1);
+    float: left
+}
+
+#retroC {
+     position:fixed;
+}
+
