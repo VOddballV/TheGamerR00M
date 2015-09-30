@@ -12,31 +12,55 @@
     <meta property="og:description" content="@Model.PostBody.Replace("<br />", " ")" />
     <meta property="og:image" content="@Model.PostImageURL" />
 }
-
-<div class="Posts">
-    <div class="PostImageContainerInPost">
-        <img id="postPic" src="@Model.PostImageURL" />
-    </div>
-    <br />
-    <div class="PostContainerInPost">
-        <p>
-            <h2>@Model.PostTitle</h2>
-            <div>
-                @Html.Raw(Model.PostBody)
-            </div>
-        </p>
+<div class="basic-Form">
+    <div class="Posts">
+        <div class="PostImageContainerInPost">
+            <img id="postPic" src="@Model.PostImageURL" />
+        </div>
         <br />
-        @Model.Post_Author
-        @Model.Post_CDate
+        <div class="PostContainerInPost">
+            <p>
+                <h2>@Model.PostTitle</h2>
+                <div id="postBody">
+                    @Html.Raw(Model.PostBody)
+                </div>
+                @if (HttpContext.Current.Session.Count > 0)
+                {
+                    var userRank = HttpContext.Current.Session["UserRankID"].ToString();
+                    if ((userRank == "1") || (userRank == "2"))
+                    {
+                        <button id="editBody" class="btn block full-width m-b" onclick="editBody()">Edit Body</button>
+                    }
+                }
+            </p>
+            @using (Html.BeginForm("SaveEditPost", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.PostID)
+                @Html.HiddenFor(x => x.PostTypeID)
+                <div id="postBodyEdit" class="form-group" hidden="hidden">
+                    <textarea class="form-control" rows="10" id="postBody" name="PostBodyEdit" required="" style="resize: vertical">@Model.PostBody.Replace("<br />", Environment.NewLine)</textarea>
+                    <button type="submit" class="btn block full-width m-b">Save Body</button>
+                </div>
+            }
+            @Model.Post_Author
+            @Model.Post_CDate
+        </div>
+        <div class="fb-share-button" data-href="@hrefString" data-layout="button"></div>
     </div>
-    <div class="fb-share-button" data-href="@hrefString" data-layout="button"></div>
 </div>
-<div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    <div id="fb-root"></div>
+    <script>
+        function editBody() {
+            $('#postBody').hide();
+            $('#editBody').hide();
+            $('#postBodyEdit').show();
+        }
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>

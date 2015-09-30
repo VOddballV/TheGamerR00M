@@ -105,6 +105,38 @@ namespace TheGamerR00M.Controllers
         }
 
         [HttpPost]
+        public ActionResult SaveEditPost(PostModel postInfo)
+        {
+            //  Get form data
+            var PostType = Request.Form["PostType"];
+            var PostTitle = Request.Form["PostTitle"];
+            var PostBody = Request.Form["PostBodyEdit"];
+            var PostTag = Request.Form["PostTag"];
+            int PostTypeID = postInfo.PostTypeID;
+            //  Replace newline with <br/><br/>
+            PostBody = PostBody.Replace(System.Environment.NewLine, "<br />");
+            //  Set PostTypeID based on Post type
+            if (PostTypeID == 1)
+            {
+                PostType = "Reviews";
+            }
+            else if (PostTypeID == 2)
+            {
+                PostType = "Stories";
+            }
+            //  Set temp post object
+            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
+            {
+                var tempPost = db.UsersPosts.Find(postInfo.PostID);
+                //  Set Post info
+                tempPost.PostBody = PostBody;
+                //  Save user info in DB
+                db.SaveChanges();
+            }
+            return RedirectToRoute(PostType);
+        }
+
+        [HttpPost]
         public ActionResult SavePost(UserModel userInfo,HttpPostedFileBase file)
         {
             //  Get form data
@@ -219,6 +251,7 @@ namespace TheGamerR00M.Controllers
                 PostInfo.Post_CDate = query.Post_CDate;
                 PostInfo.Post_Author = query.User.UserName;
                 PostInfo.PostBody = query.PostBody;
+                PostInfo.PostTypeID = query.PostTypeID;
                 PostInfo.PostID = query.PostID;
                 PostInfo.PostImageURL = query.PostImageURL;
                 PostInfo.PostTags = query.PostTags;

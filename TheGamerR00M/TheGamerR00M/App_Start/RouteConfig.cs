@@ -50,6 +50,12 @@ namespace TheGamerR00M
             );
 
             routes.MapRoute(
+                name: "SaveEditPost",
+                url: "SaveEditPost",
+                defaults: new { controller = "Posts", action = "SaveEditPost", }
+            );
+
+            routes.MapRoute(
                 name: "gotoPost",
                 url: "{StoryOrReview}/{postID}",
                 defaults: new { controller = "Posts", action = "gotoPost"}
