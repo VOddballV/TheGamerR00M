@@ -373,10 +373,10 @@ input[readonly] {
 }
 
 .PostImageContainer {
-    margin-left: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-right: 5px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 15px;
     width: 250px;
     height: 200px;
     float: left;
@@ -417,9 +417,7 @@ input[readonly] {
 }
 
 .PostTitleBody {
-    margin-left: 20px;
     margin-right: 10px;
-
 }
 
 .PostTitleBody p {

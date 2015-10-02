@@ -9,7 +9,7 @@
     <meta property="og:url" content="@hrefString" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@Model.PostTitle" />
-    <meta property="og:description" content="@Model.PostBody.Replace("<br />", " ")" />
+    <meta property="og:description" content="@Model.PostBody.Replace("<br />", " ").Replace("<b>", "").Replace("</b>","")" />
     <meta property="og:image" content="@Model.PostImageURL" />
 }
 <div class="basic-Form">

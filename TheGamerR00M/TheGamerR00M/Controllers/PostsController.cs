@@ -56,7 +56,7 @@ namespace TheGamerR00M.Controllers
 
         public ActionResult gotoPost(int postID = 0)
         {
-            if (postID == 0) 
+            if (postID == 0)
             {
                 return RedirectToRoute("Home");
             }
@@ -69,7 +69,7 @@ namespace TheGamerR00M.Controllers
             }
             // Get the users ID from session data
             UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
-           
+
             // If user id is null return normal view
             if (UserInfo.UserID == 0)
             {
@@ -136,8 +136,9 @@ namespace TheGamerR00M.Controllers
             return RedirectToRoute(PostType);
         }
 
+        [ValidateInput(false)]
         [HttpPost]
-        public ActionResult SavePost(UserModel userInfo,HttpPostedFileBase file)
+        public ActionResult SavePost(UserModel userInfo, HttpPostedFileBase file)
         {
             //  Get form data
             var PostType = Request.Form["PostType"];
@@ -158,8 +159,8 @@ namespace TheGamerR00M.Controllers
                 PostTypeID = 2;
             }
             //  Set file properties and save to server
-            var siteRoot = AppDomain.CurrentDomain.BaseDirectory; 
-            string  ImageSaveFilePath = siteRoot + "ap\\",
+            var siteRoot = AppDomain.CurrentDomain.BaseDirectory;
+            string ImageSaveFilePath = siteRoot + "ap\\",
                     myUniqueFileName = string.Format(@"{0}.jpeg", Guid.NewGuid()),
                     fileName = myUniqueFileName;
             imageLoadPath += fileName;
@@ -255,7 +256,7 @@ namespace TheGamerR00M.Controllers
                 PostInfo.PostID = query.PostID;
                 PostInfo.PostImageURL = query.PostImageURL;
                 PostInfo.PostTags = query.PostTags;
-                PostInfo.PostTitle = query.PostTitle;                
+                PostInfo.PostTitle = query.PostTitle;
             }
             return PostInfo;
         }
