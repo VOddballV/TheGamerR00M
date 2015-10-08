@@ -17,6 +17,7 @@ namespace TheGamerR00M.DB
         public User()
         {
             this.UsersPosts = new HashSet<UsersPost>();
+            this.UserComments = new HashSet<UserComment>();
         }
     
         public int UserID { get; set; }
@@ -29,5 +30,6 @@ namespace TheGamerR00M.DB
         public virtual AccountStatu AccountStatu { get; set; }
         public virtual Rank Rank { get; set; }
         public virtual ICollection<UsersPost> UsersPosts { get; set; }
+        public virtual ICollection<UserComment> UserComments { get; set; }
     }
 }

@@ -12,7 +12,10 @@
         <AssociationConnector Association="DB_9D88FA_TheGamerR00MModel.FK_UserRankID_Ranks" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DB_9D88FA_TheGamerR00MModel.UsersPost" Width="1.5" PointX="5.25" PointY="1" />
         <AssociationConnector Association="DB_9D88FA_TheGamerR00MModel.FK_UsersPosts_Users" />
-      </Diagram>
+        <EntityTypeShape EntityType="DB_9D88FA_TheGamerR00MModel.UserComment" Width="1.5" PointX="7.5" PointY="1.25" />
+        <AssociationConnector Association="DB_9D88FA_TheGamerR00MModel.FK_UserComments_Users" />
+        <AssociationConnector Association="DB_9D88FA_TheGamerR00MModel.FK_UserComments_UsersPosts" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

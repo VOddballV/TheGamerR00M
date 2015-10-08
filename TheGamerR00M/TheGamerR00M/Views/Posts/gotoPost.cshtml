@@ -1,4 +1,4 @@
-﻿@model TheGamerR00M.Models.PostModel
+﻿@model TheGamerR00M.Models.PostViewModel
 @{
     ViewBag.Title = "gotoPost";
     var hrefString = Request.Url.ToString();
@@ -8,21 +8,21 @@
 {
     <meta property="og:url" content="@hrefString" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="@Model.PostTitle" />
-    <meta property="og:description" content="@Model.PostBody.Replace("<br />", " ").Replace("<b>", "").Replace("</b>","")" />
-    <meta property="og:image" content="@Model.PostImageURL" />
+    <meta property="og:title" content="@Model.PostInfo.PostTitle" />
+    <meta property="og:description" content="@Model.PostInfo.PostBody.Replace("<br />", " ").Replace("<b>", "").Replace("</b>", "")" />
+    <meta property="og:image" content="@Model.PostInfo.PostImageURL" />
 }
 <div class="basic-Form">
     <div class="Posts">
         <div class="PostImageContainerInPost">
-            <img id="postPic" src="@Model.PostImageURL" />
+            <img id="postPic" src="@Model.PostInfo.PostImageURL" />
         </div>
         <br />
         <div class="PostContainerInPost">
             <p>
-                <h2>@Model.PostTitle</h2>
+                <h2>@Model.PostInfo.PostTitle</h2>
                 <div id="postBody">
-                    @Html.Raw(Model.PostBody)
+                    @Html.Raw(Model.PostInfo.PostBody)
                 </div>
                 @if (HttpContext.Current.Session.Count > 0)
                 {
@@ -35,32 +35,77 @@
             </p>
             @using (Html.BeginForm("SaveEditPost", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.HiddenFor(x => x.PostID)
-                @Html.HiddenFor(x => x.PostTypeID)
+                @Html.HiddenFor(x => x.PostInfo.PostID)
+                @Html.HiddenFor(x => x.PostInfo.PostTypeID)
                 <div id="postBodyEdit" class="form-group" hidden="hidden">
-                    <textarea class="form-control" rows="10" id="postBody" name="PostBodyEdit" required="" style="resize: vertical">@Model.PostBody.Replace("<br />", Environment.NewLine)</textarea>
+                    <textarea class="form-control" rows="10" id="postBody" name="PostBodyEdit" required="" style="resize: vertical">@Model.PostInfo.PostBody.Replace("<br />", Environment.NewLine)</textarea>
                     <button type="submit" class="btn block full-width m-b">Save Body</button>
                 </div>
             }
-            @Model.Post_Author
-            @Model.Post_CDate
+            @Model.PostInfo.Post_Author
+            @Model.PostInfo.Post_CDate
         </div>
         <div class="fb-share-button" data-href="@hrefString" data-layout="button"></div>
+        <br />
+        <div>
+        @foreach (var comment in Model.CommentList)
+        {
+            <div class="CommentBox">
+                <div>
+                    @comment.CommentAuthor
+                </div>
+                @Html.Raw(comment.CommentBody);
+            </div>
+        }
+        </div>
+    @if (HttpContext.Current.Session.Count > 0)
+    {
+        //using (Html.BeginForm("PostComment", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        //{
+            @Html.HiddenFor(x => x.PostInfo.PostID)
+            <div id="Comment" class="form-group">
+                <div>
+                    @HttpContext.Current.Session["UserName"].ToString()
+                </div>
+                <textarea class="form-control" rows="3" id="commentBody" name="commentBody" required=""></textarea>
+                <button class="btn block full-width m-b" onclick="submitComment();">Post Comment</button>
+            </div>
+        //}
+    }
     </div>
 </div>
     <div id="fb-root"></div>
-    <script>
-        function editBody() {
-            $('#postBody').hide();
-            $('#editBody').hide();
-            $('#postBodyEdit').show();
-        }
+<script>
+    function editBody() {
+        $('#postBody').hide();
+        $('#editBody').hide();
+        $('#postBodyEdit').show();
+    }
 
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    var values =
+    {
+        "PostID": @Model.PostInfo.PostID,
+    }
+    console.log(@Model.PostInfo.PostID);
+
+    function submitComment() {
+        $.post({
+            url: "@Url.Action("PostComment")",
+            data: values,
+            success: function(data) {
+                console.log("Made it");
+            },
+            error: console.log("didn't make it" + Error)
+        });
+    }
+
+</script>
+

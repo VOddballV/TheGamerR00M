@@ -19,6 +19,16 @@
           <Property Name="RankID" Type="int" Nullable="false" />
           <Property Name="RankName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserComments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="CommentBody" Type="varchar(max)" Nullable="false" />
+          <Property Name="Comment_CUserID" Type="int" Nullable="false" />
+          <Property Name="Comment_CDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserID" />
@@ -43,6 +53,30 @@
           <Property Name="Post_CUserID" Type="int" Nullable="false" />
           <Property Name="PostTags" Type="varchar(max)" />
         </EntityType>
+        <Association Name="FK_UserComments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserComments" Type="Self.UserComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserComments">
+              <PropertyRef Name="Comment_CUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComments_UsersPosts">
+          <End Role="UsersPosts" Type="Self.UsersPosts" Multiplicity="1" />
+          <End Role="UserComments" Type="Self.UserComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersPosts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="UserComments">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserRankID_Ranks">
           <End Role="Ranks" Type="Self.Ranks" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -82,8 +116,17 @@
         <EntityContainer Name="DB_9D88FA_TheGamerR00MModelStoreContainer">
           <EntitySet Name="AccountStatus" EntityType="Self.AccountStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ranks" EntityType="Self.Ranks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserComments" EntityType="Self.UserComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersPosts" EntityType="Self.UsersPosts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_UserComments_Users" Association="Self.FK_UserComments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserComments" EntitySet="UserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComments_UsersPosts" Association="Self.FK_UserComments_UsersPosts">
+            <End Role="UsersPosts" EntitySet="UsersPosts" />
+            <End Role="UserComments" EntitySet="UserComments" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserRankID_Ranks" Association="Self.FK_UserRankID_Ranks">
             <End Role="Ranks" EntitySet="Ranks" />
             <End Role="Users" EntitySet="Users" />
@@ -130,6 +173,7 @@
           <NavigationProperty Name="AccountStatu" Relationship="Self.FK_UserStatusID_AccountStatus" FromRole="Users" ToRole="AccountStatus" />
           <NavigationProperty Name="Rank" Relationship="Self.FK_UserRankID_Ranks" FromRole="Users" ToRole="Ranks" />
           <NavigationProperty Name="UsersPosts" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UsersPosts_Users" FromRole="User" ToRole="UsersPost" />
+          <NavigationProperty Name="UserComments" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UserComments_Users" FromRole="User" ToRole="UserComment" />
         </EntityType>
         <Association Name="FK_UserStatusID_AccountStatus">
           <End Role="AccountStatus" Type="Self.AccountStatu" Multiplicity="1" />
@@ -172,7 +216,16 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UsersPost" EntitySet="UsersPosts" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="UserComments" EntityType="DB_9D88FA_TheGamerR00MModel.UserComment" />
+          <AssociationSet Name="FK_UserComments_Users" Association="DB_9D88FA_TheGamerR00MModel.FK_UserComments_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserComment" EntitySet="UserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComments_UsersPosts" Association="DB_9D88FA_TheGamerR00MModel.FK_UserComments_UsersPosts">
+            <End Role="UsersPost" EntitySet="UsersPosts" />
+            <End Role="UserComment" EntitySet="UserComments" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="UsersPost">
           <Key>
             <PropertyRef Name="PostID" />
@@ -186,6 +239,7 @@
           <Property Name="Post_CUserID" Type="Int32" Nullable="false" />
           <Property Name="PostTags" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UsersPosts_Users" FromRole="UsersPost" ToRole="User" />
+          <NavigationProperty Name="UserComments" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UserComments_UsersPosts" FromRole="UsersPost" ToRole="UserComment" />
         </EntityType>
         <Association Name="FK_UsersPosts_Users">
           <End Type="DB_9D88FA_TheGamerR00MModel.User" Role="User" Multiplicity="1" />
@@ -199,7 +253,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="UserComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="CommentBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comment_CUserID" Type="Int32" Nullable="false" />
+          <Property Name="Comment_CDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UserComments_Users" FromRole="UserComment" ToRole="User" />
+          <NavigationProperty Name="UsersPost" Relationship="DB_9D88FA_TheGamerR00MModel.FK_UserComments_UsersPosts" FromRole="UserComment" ToRole="UsersPost" />
+        </EntityType>
+        <Association Name="FK_UserComments_Users">
+          <End Type="DB_9D88FA_TheGamerR00MModel.User" Role="User" Multiplicity="1" />
+          <End Type="DB_9D88FA_TheGamerR00MModel.UserComment" Role="UserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserComment">
+              <PropertyRef Name="Comment_CUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComments_UsersPosts">
+          <End Type="DB_9D88FA_TheGamerR00MModel.UsersPost" Role="UsersPost" Multiplicity="1" />
+          <End Type="DB_9D88FA_TheGamerR00MModel.UserComment" Role="UserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersPost">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="UserComment">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -244,6 +334,17 @@
                 <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
                 <ScalarProperty Name="PostTypeID" ColumnName="PostTypeID" />
                 <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComments">
+            <EntityTypeMapping TypeName="DB_9D88FA_TheGamerR00MModel.UserComment">
+              <MappingFragment StoreEntitySet="UserComments">
+                <ScalarProperty Name="Comment_CDate" ColumnName="Comment_CDate" />
+                <ScalarProperty Name="Comment_CUserID" ColumnName="Comment_CUserID" />
+                <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

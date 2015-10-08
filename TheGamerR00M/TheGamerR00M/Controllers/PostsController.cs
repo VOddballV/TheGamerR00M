@@ -12,6 +12,7 @@ namespace TheGamerR00M.Controllers
     {
         UserModel UserInfo = new UserModel();
         PostModel PostInfo = new PostModel();
+        List<CommentModel> CommentList = new List<CommentModel>();
         List<PostModel> PostList = new List<PostModel>();
 
         public ActionResult Reviews()
@@ -69,18 +70,22 @@ namespace TheGamerR00M.Controllers
             }
             // Get the users ID from session data
             UserInfo.UserID = Convert.ToInt32(Session["UserID"]);
-
+            //  Get comments 
+            getCommentList(postID);
+            var viewModel = new PostViewModel();
+            viewModel.CommentList = CommentList;
+            viewModel.PostInfo = post;
             // If user id is null return normal view
             if (UserInfo.UserID == 0)
             {
-                return View(post);
+                return View(viewModel);
             }
             //  Else Return view of poster
             else
             {
                 //  Get users updated information and set model
                 getUserDetails(UserInfo.UserID);
-                return View(post);
+                return View(viewModel);
             }
         }
 
@@ -102,6 +107,34 @@ namespace TheGamerR00M.Controllers
                 getUserDetails(UserInfo.UserID);
                 return View(UserInfo);
             }
+        }
+
+        [HttpPost]
+        public ActionResult PostComment (PostModel combinedView)
+        {
+            //  Get form data
+            var CommentBody = Request.Form["CommentBody"];
+            //  Replace newline with <br/><br/>
+            CommentBody = CommentBody.Replace(System.Environment.NewLine, "<br />");
+            //  Set temp comment object
+            DB.UserComment tempComment = new DB.UserComment();
+            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
+            {
+                var commentCount = db.UserComments.Count();
+
+                //  Set Post info
+                tempComment.CommentBody = CommentBody;
+                tempComment.CommentID = commentCount + 1;
+                tempComment.PostID = combinedView.PostID;
+                tempComment.Comment_CUserID = Convert.ToInt32(Session["UserID"]);
+                tempComment.Comment_CDate = DateTime.Now;
+                db.UserComments.Add(tempComment);
+                //  Save tempComment in DB
+                db.SaveChanges();
+            }
+            getCommentList(combinedView.PostID);
+            //return new EmptyResult();
+            return Json(CommentList);
         }
 
         [HttpPost]
@@ -236,6 +269,28 @@ namespace TheGamerR00M.Controllers
                 }
             }
             return PostList;
+        }
+
+        private List<CommentModel> getCommentList(int postID)
+        {
+            using (DB.DB_9D88FA_TheGamerR00MEntities db = new DB.DB_9D88FA_TheGamerR00MEntities())
+            {
+                //  Get list of comments
+                var query = db.UserComments.Where(x => x.PostID == postID).OrderByDescending(x => x.Comment_CDate);
+                //  Assign Values to PostInfo
+                foreach (var comment in query)
+                {
+                    CommentModel item = new CommentModel();
+                    item.Comment_CDate = comment.Comment_CDate;
+                    item.Comment_CUserID = comment.Comment_CUserID;
+                    item.CommentBody = comment.CommentBody;
+                    item.CommentID = comment.CommentID;
+                    item.CommentAuthor = comment.User.UserName;
+                    //  Add post to postlist
+                    CommentList.Add(item);
+                }
+            }
+            return CommentList;
         }
 
         private PostModel getPost(int postID)

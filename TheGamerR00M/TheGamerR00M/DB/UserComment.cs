@@ -12,23 +12,15 @@ namespace TheGamerR00M.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class UsersPost
+    public partial class UserComment
     {
-        public UsersPost()
-        {
-            this.UserComments = new HashSet<UserComment>();
-        }
-    
+        public int CommentID { get; set; }
         public int PostID { get; set; }
-        public int PostTypeID { get; set; }
-        public string PostTitle { get; set; }
-        public string PostImageURL { get; set; }
-        public string PostBody { get; set; }
-        public System.DateTime Post_CDate { get; set; }
-        public int Post_CUserID { get; set; }
-        public string PostTags { get; set; }
+        public string CommentBody { get; set; }
+        public int Comment_CUserID { get; set; }
+        public System.DateTime Comment_CDate { get; set; }
     
         public virtual User User { get; set; }
-        public virtual ICollection<UserComment> UserComments { get; set; }
+        public virtual UsersPost UsersPost { get; set; }
     }
 }
