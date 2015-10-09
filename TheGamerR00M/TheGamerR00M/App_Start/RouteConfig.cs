@@ -55,7 +55,11 @@ namespace TheGamerR00M
                 defaults: new { controller = "Posts", action = "SaveEditPost", }
             );
 
-
+            routes.MapRoute(
+                name: "PostComment",
+                url: "PostComment",
+                defaults: new { controller = "Posts", action = "PostComment", }
+            );
 
             routes.MapRoute(
                 name: "gotoPost",

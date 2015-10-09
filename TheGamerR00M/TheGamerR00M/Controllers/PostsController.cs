@@ -113,7 +113,7 @@ namespace TheGamerR00M.Controllers
         public ActionResult PostComment (PostModel combinedView)
         {
             //  Get form data
-            var CommentBody = Request.Form["CommentBody"];
+            var CommentBody = combinedView.PostBody;
             //  Replace newline with <br/><br/>
             CommentBody = CommentBody.Replace(System.Environment.NewLine, "<br />");
             //  Set temp comment object

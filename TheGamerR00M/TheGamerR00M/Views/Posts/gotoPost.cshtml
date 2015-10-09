@@ -48,6 +48,10 @@
         <div class="fb-share-button" data-href="@hrefString" data-layout="button"></div>
         <br />
         <div>
+            <div id="newCommentBox" hidden="hidden">
+                <div id="newCommentAuthor"></div>
+                <p id="newCommentBody"></p>
+            </div>
         @foreach (var comment in Model.CommentList)
         {
             <div class="CommentBox">
@@ -90,20 +94,29 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    var values =
-    {
-        "PostID": @Model.PostInfo.PostID,
-    }
-    console.log(@Model.PostInfo.PostID);
-
     function submitComment() {
-        $.post({
-            url: "@Url.Action("PostComment")",
+        var values =
+        {
+            "PostBody": $("#commentBody").val(),
+            "PostID": @Model.PostInfo.PostID,
+        }
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("PostComment", "Posts")",
             data: values,
             success: function(data) {
-                console.log("Made it");
+               // $("#newCommentAuthor").val() = @HttpContext.Current.Session["UserName"].ToString();
+                $("#newCommentBody").val() = $("#commentBody").val(); 
+                $("#commentBody").fadeOut();
+                $("#newCommentBox").fadeIn(); 
+                $("#commentBody").delay(3000).val() = ""; 
+                //@Model.CommentList = data;
+                $("#newCommentBox").hide();
+                $("#commentBody")
             },
-            error: console.log("didn't make it" + Error)
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
+            }
         });
     }
 
